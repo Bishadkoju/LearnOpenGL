@@ -29,6 +29,9 @@
     <ClInclude Include="shader.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="camera.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="container.jpg">
@@ -39,10 +42,16 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\help\3.3.shader.fs">
+    <None Include="cube.vs">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="..\help\3.3.shader.vs">
+    <None Include="cube.fs">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="lightSource.fs">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="lightSource.vs">
       <Filter>Source Files</Filter>
     </None>
   </ItemGroup>
