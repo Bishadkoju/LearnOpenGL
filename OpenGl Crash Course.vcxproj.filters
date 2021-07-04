@@ -54,5 +54,11 @@
     <None Include="lightSource.vs">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="plane.vs">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="plane.fs">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
