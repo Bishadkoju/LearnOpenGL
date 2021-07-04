@@ -205,22 +205,22 @@ int main()
         lightingShader.setMat4("projection", projection);
         lightingShader.setMat4("view", view);
 
-        lightingShader.setVec3("material.ambient", 1.0f, 0.5f, 0.31f);
-        lightingShader.setVec3("material.diffuse", 1.0f, 0.5f, 0.31f);
-        lightingShader.setVec3("material.specular", 0.5f, 0.5f, 0.5f);
-        lightingShader.setFloat("material.shininess", 32.0f);
+        lightingShader.setVec3("material.ambient", 0.1745,	0.01175,	0.01175);
+        lightingShader.setVec3("material.diffuse", 0.61424,	0.04136,	0.04136);
+        lightingShader.setVec3("material.specular", 0.727811,	0.626959,	0.626959);
+        lightingShader.setFloat("material.shininess", 0.6);
 
-        glm::vec3 lightColor;
+        /*glm::vec3 lightColor;
         lightColor.x = sin(glfwGetTime() * 2.0f);
         lightColor.y = sin(glfwGetTime() * 0.7f);
         lightColor.z = sin(glfwGetTime() * 1.3f);
 
         glm::vec3 diffuseColor = lightColor * glm::vec3(0.5f);
-        glm::vec3 ambientColor = lightColor * glm::vec3(0.2f);
+        glm::vec3 ambientColor = lightColor * glm::vec3(0.2f);*/
 
 
-        lightingShader.setVec3("light.ambient", ambientColor);
-        lightingShader.setVec3("light.diffuse", diffuseColor);
+        lightingShader.setVec3("light.ambient", 1.0f, 1.0f, 1.0f);
+        lightingShader.setVec3("light.diffuse", 1.0f, 1.0f, 1.0f);
         lightingShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
         lightingShader.setVec3("light.position", lightPos);
 
@@ -239,7 +239,7 @@ int main()
         lightCubeShader.use();
         lightCubeShader.setMat4("projection", projection);
         lightCubeShader.setMat4("view", view);
-        lightCubeShader.setVec3("color", lightColor);
+        lightCubeShader.setVec3("color", glm::vec3(1.0f));
         float lightPosRadius = 1.5;
         float xOff = cos(glfwGetTime())*lightPosRadius;
         float zOff = sin(glfwGetTime()) * lightPosRadius;
