@@ -239,6 +239,7 @@ int main()
         lightCubeShader.use();
         lightCubeShader.setMat4("projection", projection);
         lightCubeShader.setMat4("view", view);
+        lightCubeShader.setVec3("color", lightColor);
         float lightPosRadius = 1.5;
         float xOff = cos(glfwGetTime())*lightPosRadius;
         float zOff = sin(glfwGetTime()) * lightPosRadius;
