@@ -194,6 +194,11 @@ int main()
         lightCubeShader.use();
         lightCubeShader.setMat4("projection", projection);
         lightCubeShader.setMat4("view", view);
+        float lightPosRadius = 1.5;
+        float xOff = cos(glfwGetTime())*lightPosRadius;
+        float zOff = sin(glfwGetTime()) * lightPosRadius;
+        lightPos = glm::vec3(xOff, lightPos.y, zOff);
+        
         model = glm::mat4(1.0f);
         model = glm::translate(model, lightPos);
         model = glm::scale(model, glm::vec3(0.2f)); // a smaller cube
