@@ -33,7 +33,7 @@ float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
 // lighting
-glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
+glm::vec3 lightPos(1.2f, 2.0f, 2.0f);
 
 int main()
 {
@@ -77,7 +77,6 @@ int main()
     // ------------------------------------
     Shader lightingShader("cube.vs", "cube.fs");
     Shader lightCubeShader("lightSource.vs", "lightSource.fs");
-    Shader planeShader("plane.vs", "plane.fs");
 
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
@@ -125,6 +124,20 @@ int main()
         -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  0.0f,  0.0f,
         -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f,  1.0f
     };
+
+    glm::vec3 cubePositions[] = {
+        glm::vec3(0.0f,  0.0f,  0.0f),
+        glm::vec3(2.0f,  5.0f, -15.0f),
+        glm::vec3(-1.5f, -2.2f, -2.5f),
+        glm::vec3(-3.8f, -2.0f, -12.3f),
+        glm::vec3(2.4f, -0.4f, -3.5f),
+        glm::vec3(-1.7f,  3.0f, -7.5f),
+        glm::vec3(1.3f, -2.0f, -2.5f),
+        glm::vec3(1.5f,  2.0f, -2.5f),
+        glm::vec3(1.5f,  0.2f, -1.5f),
+        glm::vec3(-1.3f,  1.0f, -1.5f)
+    };
+
     float planeSize = 10.0f;
     float xzPlaneVertices[] = {
         -planeSize, 0, -planeSize,
@@ -218,14 +231,9 @@ int main()
         lightingShader.setFloat("material.shininess", 32);
 
         lightingShader.setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
-        lightingShader.setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
+        lightingShader.setVec3("light.diffuse", 0.8f, 0.8f, 0.8f);
         lightingShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
-        lightingShader.setVec3("light.position", lightPos);
-
-        // world transformation
-        glm::mat4 model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(0.0, 1, 0.0));
-        lightingShader.setMat4("model", model);
+        lightingShader.setVec3("light.direction", -0.2f,-0.1f, -0.3f);
 
         // bind texutre
         glActiveTexture(GL_TEXTURE0);
@@ -233,37 +241,43 @@ int main()
 
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, specularMap);
+        glm::mat4 model = glm::mat4(1.0f);
 
-        // render the cube
         glBindVertexArray(cubeVAO);
-        glDrawArrays(GL_TRIANGLES, 0, 36);
+        // world transformation
+        for (int i = 0; i < 10; i++) {
+            model = glm::mat4(1.0f);
+            model = glm::translate(model, cubePositions[i]);
+            float angle = 15 * i;
+            model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0, 0.5, 0.5));
+            lightingShader.setMat4("model", model);
+            // render the cube
+            glDrawArrays(GL_TRIANGLES, 0, 36);
+        }
+        
+        //// Draw plane
+        //model = glm::mat4(1.0f);
+        //lightingShader.setMat4("model", model);
+        //glBindVertexArray(planeVAO);
+        //glDrawArrays(GL_TRIANGLES, 0, 6);
 
         // also draw the lamp object
         lightCubeShader.use();
         lightCubeShader.setMat4("projection", projection);
         lightCubeShader.setMat4("view", view);
         lightCubeShader.setVec3("color", glm::vec3(1.0f));
-        float lightPosRadius = 1.5;
+        /*float lightPosRadius = 1.5;
         float xOff = cos(glfwGetTime())*lightPosRadius;
         float zOff = sin(glfwGetTime()) * lightPosRadius;
-        lightPos = glm::vec3(xOff, 2, zOff);
+        lightPos = glm::vec3(xOff, 2, zOff);*/
         
         model = glm::mat4(1.0f);
         model = glm::translate(model, lightPos);
         model = glm::scale(model, glm::vec3(0.2f)); // a smaller cube
-    lightCubeShader.setMat4("model", model);
+        lightCubeShader.setMat4("model", model);
 
-    glBindVertexArray(lightCubeVAO);
-    glDrawArrays(GL_TRIANGLES, 0, 36);
-
-    planeShader.use();
-    planeShader.setMat4("projection", projection);
-    planeShader.setMat4("view", view);
-    model = glm::mat4(1.0f);
-    planeShader.setMat4("model", model);
-    glBindVertexArray(planeVAO);
-    glDrawArrays(GL_TRIANGLES, 0, 6);
-
+        glBindVertexArray(lightCubeVAO);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
 
     // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
     // -------------------------------------------------------------------------------
