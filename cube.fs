@@ -8,7 +8,8 @@ in vec2 TexCoords;
 struct Light {
     vec3 position;
     vec3 direction;
-    float cutOff;
+    float cutoff;
+    float outerCutoff;
 
     vec3 ambient;
     vec3 diffuse;
@@ -34,7 +35,8 @@ void main()
     
     vec3 lightDir = normalize(light.position-fragPos);
     float theta = dot(lightDir, normalize(-light.direction) );
-    if (theta > light.cutOff) {
+    float epsilon = light.cutoff - light.outerCutoff;
+    float intensity = clamp((theta-light.outerCutoff)/epsilon,0.0f,1.0f);
        // ambient
         vec3 ambient = light.ambient*vec3(texture(material.diffuse,TexCoords).rgb);
 
@@ -56,9 +58,9 @@ void main()
         diffuse*=attenuation;
         specular*=attenuation;
 
+        diffuse*=intensity;
+        specular*=intensity;
+
         vec3 result = (ambient+diffuse+specular)*objectColor;
         FragColor = vec4(result, 1.0);
-    } else {
-        FragColor = vec4(light.ambient*vec3(texture(material.diffuse,TexCoords).rgb),1.0);
-    }
 }
