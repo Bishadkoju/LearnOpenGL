@@ -13,46 +13,61 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Shaders">
+      <UniqueIdentifier>{b79dbb3f-96d2-4e53-b9f1-0e3d3b8d8c84}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="glad.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="glad.c">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stb_image.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="Libraries\include\camera.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="shader.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="Libraries\include\mesh.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="camera.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="Libraries\include\model.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\stb_image.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="container.jpg">
+    <Image Include="Assets\images\awesomeface.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="awesomeface.png">
+    <Image Include="Assets\images\container.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\images\container2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\images\container2_specular.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <None Include="cube.vs">
-      <Filter>Source Files</Filter>
+    <None Include="Shaders\cube.fs">
+      <Filter>Source Files\Shaders</Filter>
     </None>
-    <None Include="cube.fs">
-      <Filter>Source Files</Filter>
+    <None Include="Shaders\cube.vs">
+      <Filter>Source Files\Shaders</Filter>
     </None>
-    <None Include="lightSource.fs">
-      <Filter>Source Files</Filter>
+    <None Include="Shaders\lightSource.fs">
+      <Filter>Source Files\Shaders</Filter>
     </None>
-    <None Include="lightSource.vs">
-      <Filter>Source Files</Filter>
+    <None Include="Shaders\lightSource.vs">
+      <Filter>Source Files\Shaders</Filter>
     </None>
   </ItemGroup>
 </Project>
