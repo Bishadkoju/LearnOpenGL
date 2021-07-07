@@ -69,5 +69,20 @@
     <None Include="Shaders\lightSource.vs">
       <Filter>Source Files\Shaders</Filter>
     </None>
+    <None Include="Shaders\1.model_loading.fs">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
+    <None Include="Shaders\1.model_loading.vs">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
+    <None Include="Shaders\depth_testing.fs">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
+    <None Include="Shaders\depth_testing.vs">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
+    <None Include="Shaders\shaderSingleColor.fs">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>
